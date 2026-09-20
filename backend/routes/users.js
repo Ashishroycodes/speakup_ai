@@ -1,21 +1,23 @@
-export default async function userRoutes(req, res, pathname) {
-  const { UserController } = await import(`../controllers/userController.js?t=${Date.now()}`);
+import { UserController } from '../controllers/userController.js';
 
-  if (req.method === 'GET' && (pathname === '/api/users' || pathname === '/api/users/')) {
+export default async function userRoutes(req, res, pathname) {
+  const targetPath = pathname || (req.url ? new URL(req.url, 'http://localhost').pathname : '');
+
+  if (req.method === 'GET' && (targetPath === '/api/users' || targetPath === '/api/users/')) {
     return UserController.getAllUsers(req, res);
   }
 
-  if (req.method === 'POST' && pathname === '/api/users/forgot-password') {
+  if (req.method === 'POST' && targetPath === '/api/users/forgot-password') {
     return UserController.requestPasswordReset(req, res);
   }
 
-  if (req.method === 'POST' && pathname === '/api/users/reset-password') {
+  if (req.method === 'POST' && targetPath === '/api/users/reset-password') {
     return UserController.executePasswordReset(req, res);
   }
 
   // Route: GET /api/users/:id
-  if (req.method === 'GET' && pathname.startsWith('/api/users/')) {
-    const userId = pathname.replace('/api/users/', '').trim();
+  if (req.method === 'GET' && targetPath.startsWith('/api/users/')) {
+    const userId = targetPath.replace('/api/users/', '').trim();
     if (userId && !userId.includes('/')) {
       return UserController.getUserById(req, res, userId);
     }

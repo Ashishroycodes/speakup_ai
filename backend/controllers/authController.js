@@ -126,8 +126,7 @@ export const AuthController = {
         });
       }
 
-      const { UserModel: FreshUserModel } = await import(`../models/User.js?t=${Date.now()}`);
-      const user = await FreshUserModel.findByEmailOrName(loginIdentifier);
+      const user = await UserModel.findByEmailOrName(loginIdentifier);
       if (!user) {
         return res.status(401).json({
           success: false,

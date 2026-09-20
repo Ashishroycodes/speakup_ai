@@ -22,6 +22,7 @@ export function getMysqlConfig() {
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0,
+    connectTimeout: 5000,
     enableKeepAlive: true,
     keepAliveInitialDelay: 10000
   };
@@ -66,7 +67,8 @@ export async function getMysqlPool() {
           host: config.host,
           port: config.port,
           user: config.user,
-          password: config.password
+          password: config.password,
+          connectTimeout: 4000
         });
         await adminConn.query(`CREATE DATABASE IF NOT EXISTS \`${config.database}\` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;`);
         await adminConn.end();

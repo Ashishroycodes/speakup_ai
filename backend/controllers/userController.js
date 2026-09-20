@@ -3,37 +3,25 @@ import { UserModel } from '../models/User.js';
 import { hashPassword, generateResetToken } from '../utils/security.js';
 import { validatePassword } from '../utils/validation.js';
 
-async function getDb() {
-  try {
-    const mod = await import(`../config/database.js?t=${Date.now()}`);
-    return mod.db;
-  } catch {
-    return db;
-  }
-}
-
 async function querySql(sql, params = []) {
-  const activeDb = await getDb();
-  if (activeDb.query) {
-    return await activeDb.query(sql, params);
+  if (db && db.query) {
+    return await db.query(sql, params);
   }
-  return activeDb.prepare(sql).all(...params);
+  return db.prepare(sql).all(...params);
 }
 
 async function queryOneSql(sql, params = []) {
-  const activeDb = await getDb();
-  if (activeDb.queryOne) {
-    return await activeDb.queryOne(sql, params);
+  if (db && db.queryOne) {
+    return await db.queryOne(sql, params);
   }
-  return activeDb.prepare(sql).get(...params) || null;
+  return db.prepare(sql).get(...params) || null;
 }
 
 async function executeSql(sql, params = []) {
-  const activeDb = await getDb();
-  if (activeDb.execute) {
-    return await activeDb.execute(sql, params);
+  if (db && db.execute) {
+    return await db.execute(sql, params);
   }
-  return activeDb.prepare(sql).run(...params);
+  return db.prepare(sql).run(...params);
 }
 
 export const UserController = {

@@ -1,5 +1,6 @@
 import { UserModel } from '../models/User.js';
 import { AssignmentModel } from '../models/Assignment.js';
+import { StudentProfileModel } from '../models/StudentProfile.js';
 import { sanitizeString } from '../utils/validation.js';
 
 export const StudentController = {
@@ -8,7 +9,6 @@ export const StudentController = {
    */
   async getProfile(req, res) {
     try {
-      const { StudentProfileModel } = await import(`../models/StudentProfile.js?t=${Date.now()}`);
       const profile = await StudentProfileModel.findByUserId(req.user.id);
       return res.status(200).json({
         success: true,
@@ -34,7 +34,6 @@ export const StudentController = {
    */
   async updateProfile(req, res) {
     try {
-      const { StudentProfileModel } = await import(`../models/StudentProfile.js?t=${Date.now()}`);
       const { name, institution, course, year, primaryGoal } = req.body || {};
 
       if (name) {
@@ -67,7 +66,6 @@ export const StudentController = {
    */
   async syncProgress(req, res) {
     try {
-      const { StudentProfileModel } = await import(`../models/StudentProfile.js?t=${Date.now()}`);
       const progressData = req.body || {};
 
       const updated = await StudentProfileModel.syncProgress(req.user.id, progressData);

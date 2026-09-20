@@ -1,5 +1,7 @@
 import crypto from 'node:crypto';
 import { TeacherProfileModel } from '../models/TeacherProfile.js';
+import { StudentProfileModel } from '../models/StudentProfile.js';
+import { AssignmentModel } from '../models/Assignment.js';
 import { UserModel } from '../models/User.js';
 import { sanitizeString } from '../utils/validation.js';
 
@@ -9,8 +11,6 @@ export const TeacherController = {
    */
   async getStudents(req, res) {
     try {
-      const { StudentProfileModel } = await import(`../models/StudentProfile.js?t=${Date.now()}`);
-      const { AssignmentModel } = await import(`../models/Assignment.js?t=${Date.now()}`);
       const students = await StudentProfileModel.findAll();
       const assignments = await AssignmentModel.findAll();
 
@@ -65,7 +65,6 @@ export const TeacherController = {
         return res.status(400).json({ success: false, message: 'Student ID required.' });
       }
 
-      const { StudentProfileModel } = await import(`../models/StudentProfile.js?t=${Date.now()}`);
       const student = await StudentProfileModel.findByUserId(id);
       if (!student) {
         return res.status(404).json({ success: false, message: 'Student not found.' });
@@ -105,7 +104,6 @@ export const TeacherController = {
       }
 
       const assignmentId = `asg_${Date.now()}_${crypto.randomBytes(3).toString('hex')}`;
-      const { AssignmentModel } = await import(`../models/Assignment.js?t=${Date.now()}`);
       const assignment = await AssignmentModel.create({
         id: assignmentId,
         teacherId: req.user.id,
@@ -136,7 +134,6 @@ export const TeacherController = {
    */
   async getAssignments(req, res) {
     try {
-      const { AssignmentModel } = await import(`../models/Assignment.js?t=${Date.now()}`);
       const assignments = await AssignmentModel.findAll();
       return res.status(200).json({
         success: true,
@@ -161,7 +158,6 @@ export const TeacherController = {
         return res.status(400).json({ success: false, message: 'Assignment ID is required.' });
       }
 
-      const { AssignmentModel } = await import(`../models/Assignment.js?t=${Date.now()}`);
       await AssignmentModel.delete(id, req.user.id);
 
       return res.status(200).json({

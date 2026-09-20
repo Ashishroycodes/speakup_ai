@@ -1,28 +1,14 @@
-import { db as defaultDb } from '../config/database.js';
-
-async function getDb() {
-  if (defaultDb && typeof defaultDb.queryOne === 'function') {
-    return defaultDb;
-  }
-  try {
-    const mod = await import(`../config/database.js?t=${Date.now()}`);
-    return mod.db || mod.default?.db || defaultDb;
-  } catch {
-    return defaultDb;
-  }
-}
+import { db } from '../config/database.js';
 
 async function queryOne(sql, params = []) {
-  const d = await getDb();
-  if (typeof d.queryOne === 'function') return d.queryOne(sql, params);
-  if (typeof d.prepare === 'function') return d.prepare(sql).get(...params) || null;
+  if (db && typeof db.queryOne === 'function') return db.queryOne(sql, params);
+  if (db && typeof db.prepare === 'function') return db.prepare(sql).get(...params) || null;
   return null;
 }
 
 async function execute(sql, params = []) {
-  const d = await getDb();
-  if (typeof d.execute === 'function') return d.execute(sql, params);
-  if (typeof d.prepare === 'function') return d.prepare(sql).run(...params);
+  if (db && typeof db.execute === 'function') return db.execute(sql, params);
+  if (db && typeof db.prepare === 'function') return db.prepare(sql).run(...params);
   return null;
 }
 

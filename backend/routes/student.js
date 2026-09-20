@@ -1,11 +1,12 @@
 import { authMiddleware } from '../middleware/authMiddleware.js';
+import { StudentController } from '../controllers/studentController.js';
 
 export default async function studentRoutes(req, res, pathname) {
-  const { StudentController } = await import(`../controllers/studentController.js?t=${Date.now()}`);
+  const targetPath = pathname || (req.url ? new URL(req.url, 'http://localhost').pathname : '');
   const user = await authMiddleware(req, res);
   if (!user) return;
 
-  if (pathname === '/api/student/profile') {
+  if (targetPath === '/api/student/profile') {
     if (req.method === 'GET') {
       return StudentController.getProfile(req, res);
     }
@@ -14,11 +15,11 @@ export default async function studentRoutes(req, res, pathname) {
     }
   }
 
-  if (pathname === '/api/student/progress/sync' && req.method === 'POST') {
+  if (targetPath === '/api/student/progress/sync' && req.method === 'POST') {
     return StudentController.syncProgress(req, res);
   }
 
-  if (pathname === '/api/student/assignments' && req.method === 'GET') {
+  if (targetPath === '/api/student/assignments' && req.method === 'GET') {
     return StudentController.getAssignments(req, res);
   }
 

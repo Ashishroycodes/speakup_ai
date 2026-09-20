@@ -1,4 +1,3 @@
-import { DatabaseSync } from 'node:sqlite';
 import path from 'node:path';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
@@ -7,6 +6,15 @@ import { getMysqlPool, initMysqlDatabase, getMysqlStatus } from './mysql.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Dynamically import native SQLite if supported by Node runtime
+let DatabaseSyncClass = null;
+try {
+  const sqliteMod = await import('node:sqlite');
+  DatabaseSyncClass = sqliteMod.DatabaseSync;
+} catch {
+  // Gracefully handle older Node runtimes or environments without native sqlite
+}
 
 /**
  * Check if MySQL database engine is requested in .env
@@ -17,21 +25,57 @@ export function isMysqlConfigured() {
 }
 
 // --------------------------------------------------------------------------
-// SQLite Engine Fallback Setup
+// SQLite Engine Fallback Setup (Writable in local dev and Vercel /tmp)
 // --------------------------------------------------------------------------
+const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
 const envDbPath = process.env.DATABASE_PATH;
 export const DB_PATH = envDbPath
   ? (path.isAbsolute(envDbPath) ? envDbPath : path.resolve(process.cwd(), envDbPath))
-  : path.resolve(__dirname, '../../data/speakup.db');
+  : (isServerless ? path.join('/tmp', 'speakup.db') : path.resolve(__dirname, '../../data/speakup.db'));
 
-const DB_DIR = path.dirname(DB_PATH);
-if (!fs.existsSync(DB_DIR)) {
-  fs.mkdirSync(DB_DIR, { recursive: true });
+let _sqliteDbInstance = null;
+let _sqliteInitError = null;
+
+export function getSqliteDb() {
+  if (_sqliteDbInstance) return _sqliteDbInstance;
+  if (_sqliteInitError) throw _sqliteInitError;
+
+  if (!DatabaseSyncClass) {
+    const err = new Error('Native SQLite (DatabaseSync) is not available in this Node runtime.');
+    _sqliteInitError = err;
+    throw err;
+  }
+
+  try {
+    const dbDir = path.dirname(DB_PATH);
+    if (!fs.existsSync(dbDir)) {
+      try {
+        fs.mkdirSync(dbDir, { recursive: true });
+      } catch {
+        // Safe fallback in restricted filesystems
+      }
+    }
+
+    _sqliteDbInstance = new DatabaseSyncClass(DB_PATH);
+    try { _sqliteDbInstance.exec('PRAGMA journal_mode = WAL;'); } catch {}
+    try { _sqliteDbInstance.exec('PRAGMA foreign_keys = ON;'); } catch {}
+    return _sqliteDbInstance;
+  } catch (err) {
+    _sqliteInitError = err;
+    console.warn(`[DB] SQLite initialization failed: ${err.message}`);
+    throw err;
+  }
 }
 
-export const sqliteDb = new DatabaseSync(DB_PATH);
-sqliteDb.exec('PRAGMA journal_mode = WAL;');
-sqliteDb.exec('PRAGMA foreign_keys = ON;');
+// Proxy wrapper for backward-compatibility with synchronous sqliteDb calls
+export const sqliteDb = {
+  prepare(sql) {
+    return getSqliteDb().prepare(sql);
+  },
+  exec(sql) {
+    return getSqliteDb().exec(sql);
+  }
+};
 
 // --------------------------------------------------------------------------
 // Unified Database Interface (Supports both MySQL and SQLite)
@@ -42,6 +86,7 @@ export const db = {
   },
 
   async query(sql, params = []) {
+    if (!isInitialized) await initDatabase().catch(() => {});
     if (this.isMysql) {
       try {
         const pool = await getMysqlPool();
@@ -55,6 +100,7 @@ export const db = {
   },
 
   async queryOne(sql, params = []) {
+    if (!isInitialized) await initDatabase().catch(() => {});
     if (this.isMysql) {
       try {
         const pool = await getMysqlPool();
@@ -68,6 +114,7 @@ export const db = {
   },
 
   async execute(sql, params = []) {
+    if (!isInitialized) await initDatabase().catch(() => {});
     if (this.isMysql) {
       try {
         const pool = await getMysqlPool();
@@ -129,22 +176,40 @@ export const db = {
   }
 };
 
+let isInitializing = false;
+let isInitialized = false;
+
 /**
  * Initialize Database Tables and Schemas
  */
 export async function initDatabase() {
-  if (isMysqlConfigured()) {
-    try {
-      await initMysqlDatabase();
-      console.log('✅ [Database] MySQL connection pool ready & schema initialized.');
-      return;
-    } catch (err) {
-      console.warn(`⚠️ [Database] MySQL connection failed (${err.message}). Initializing SQLite fallback.`);
-    }
-  }
+  if (isInitialized || isInitializing) return;
+  isInitializing = true;
 
-  // SQLite Schema Initialization
-  initSqliteDatabase();
+  try {
+    if (isMysqlConfigured()) {
+      try {
+        await initMysqlDatabase();
+        console.log('✅ [Database] MySQL connection pool ready & schema initialized.');
+        isInitialized = true;
+        return;
+      } catch (err) {
+        console.warn(`⚠️ [Database] MySQL connection failed (${err.message}). Initializing SQLite fallback.`);
+      }
+    }
+
+    // SQLite Schema Initialization
+    if (DatabaseSyncClass) {
+      try {
+        initSqliteDatabase();
+        isInitialized = true;
+      } catch (sqliteErr) {
+        console.warn(`⚠️ [Database] SQLite schema init warning: ${sqliteErr.message}`);
+      }
+    }
+  } finally {
+    isInitializing = false;
+  }
 }
 
 /**
@@ -284,6 +349,10 @@ function seedSqliteDefaultAccounts() {
  * Diagnostic helper to check database health and statistics
  */
 export async function getDatabaseStatus() {
+  if (!isInitialized) {
+    await initDatabase().catch(() => {});
+  }
+
   if (isMysqlConfigured()) {
     const mysqlStatus = await getMysqlStatus();
     if (mysqlStatus.connected) return mysqlStatus;
@@ -327,5 +396,7 @@ function getSqliteStatus() {
   }
 }
 
-// Automatically initialize database
-initDatabase().catch(err => console.error('[Database init error]:', err));
+// Automatically initialize database only in long-running local/standalone server (not during Vercel build/packaging)
+if (!process.env.VERCEL) {
+  initDatabase().catch(err => console.warn('[Database auto-init notice]:', err.message));
+}
