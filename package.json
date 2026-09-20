@@ -1,0 +1,30 @@
+{
+  "name": "speakup",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "server": "node server.js",
+    "start": "node server.js",
+    "db:status": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => console.log(JSON.stringify(await m.getDatabaseStatus(), null, 2)))\"",
+    "db:users": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => console.table(await m.db.query('SELECT id, name, email, role, created_at, last_login FROM users')))\"",
+    "db:mysql-test": "node --env-file=.env -e \"import('./backend/config/mysql.js').then(async m => { console.log('Testing MySQL connection...'); try { await m.initMysqlDatabase(); console.log('MySQL Status:', await m.getMysqlStatus()); } catch(e) { console.error('MySQL Connection Failed:', e.message); } })\""
+  },
+  "dependencies": {
+    "lucide-react": "^1.46.0",
+    "mysql2": "^3.24.4",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "oxlint": "^1.81.0",
+    "vite": "^8.3.0"
+  }
+}

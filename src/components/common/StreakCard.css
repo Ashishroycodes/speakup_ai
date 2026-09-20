@@ -1,0 +1,897 @@
+/* ==========================================================================
+   SpeakUp - Day Streak Component Styles
+   ========================================================================== */
+
+.streak-card-component {
+  position: relative;
+  background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 50%, #FFF7ED 100%);
+  border: 1.5px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-xl, 18px);
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  box-shadow: 0 8px 24px -4px rgba(245, 158, 11, 0.15), 0 2px 6px -1px rgba(0, 0, 0, 0.04);
+  transition: transform var(--transition-normal, 0.25s), box-shadow var(--transition-normal, 0.25s);
+}
+
+.streak-card-component:hover {
+  box-shadow: 0 12px 28px -4px rgba(245, 158, 11, 0.22), 0 4px 10px -2px rgba(0, 0, 0, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   Feedback Toast Banner
+   -------------------------------------------------------------------------- */
+.streak-toast-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: var(--radius-md, 10px);
+  font-size: 0.85rem;
+  font-weight: 600;
+  animation: slideDown 0.3s ease-out;
+}
+
+.streak-toast-banner.success {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+}
+
+.streak-toast-banner.info {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1E40AF;
+}
+
+.toast-content-inner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toast-icon {
+  color: #10B981;
+  flex-shrink: 0;
+}
+
+.toast-dismiss-btn {
+  background: transparent;
+  border: none;
+  color: currentColor;
+  cursor: pointer;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.toast-dismiss-btn:hover {
+  opacity: 1;
+}
+
+/* --------------------------------------------------------------------------
+   Header Row
+   -------------------------------------------------------------------------- */
+.streak-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+}
+
+.streak-identity-group {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.streak-flame-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.streak-flame-wrapper.flame-lit {
+  background: linear-gradient(135deg, #F59E0B 0%, #EA580C 100%);
+  color: #FFFFFF;
+}
+
+.streak-flame-wrapper.flame-idle {
+  background: rgba(245, 158, 11, 0.15);
+  color: #D97706;
+  box-shadow: none;
+}
+
+.flame-icon-active {
+  animation: flamePulse 2s ease-in-out infinite;
+}
+
+@keyframes flamePulse {
+  0%, 100% {
+    transform: scale(1);
+    filter: drop-shadow(0 0 2px rgba(245, 158, 11, 0.4));
+  }
+  50% {
+    transform: scale(1.12);
+    filter: drop-shadow(0 0 8px rgba(234, 88, 12, 0.7));
+  }
+}
+
+.streak-titles-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.streak-count-heading {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.streak-count-number {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.6rem;
+  font-weight: 900;
+  color: #92400E;
+  line-height: 1;
+}
+
+.streak-count-unit {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #92400E;
+}
+
+.streak-tier-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: var(--radius-full, 9999px);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.tier-gray {
+  background: #E5E7EB;
+  color: #4B5563;
+}
+
+.tier-amber {
+  background: #FEF3C7;
+  color: #B45309;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.tier-orange {
+  background: #FFEDD5;
+  color: #C2410C;
+  border: 1px solid rgba(234, 88, 12, 0.3);
+}
+
+.tier-purple {
+  background: #F3E8FF;
+  color: #7E22CE;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.tier-indigo {
+  background: #E0E7FF;
+  color: #4338CA;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.tier-emerald {
+  background: #D1FAE5;
+  color: #047857;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.streak-subtitle-text {
+  font-size: 0.82rem;
+  color: #78350F;
+  margin: 0;
+  font-weight: 500;
+}
+
+/* --------------------------------------------------------------------------
+   Header Actions Right
+   -------------------------------------------------------------------------- */
+.streak-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.streak-record-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 5px 11px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.76rem;
+  color: #92400E;
+  font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.trophy-icon {
+  color: #D97706;
+}
+
+.record-label {
+  color: #B45309;
+}
+
+.record-value {
+  font-weight: 800;
+  color: #78350F;
+}
+
+.streak-advance-test-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px dashed rgba(245, 158, 11, 0.6);
+  color: #B45309;
+  padding: 5px 10px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.streak-advance-test-btn:hover {
+  background: #FEF3C7;
+  color: #78350F;
+  border-color: #D97706;
+  transform: translateY(-1px);
+}
+
+.streak-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #DC2626;
+  padding: 5px 12px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(220, 38, 38, 0.08);
+}
+
+.streak-reset-btn:hover {
+  background: #FEE2E2;
+  border-color: #DC2626;
+  color: #B91C1C;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   Daily Status Banner
+   -------------------------------------------------------------------------- */
+.streak-daily-status-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 8px 14px;
+  border-radius: var(--radius-lg, 12px);
+  font-size: 0.82rem;
+  transition: all 0.25s ease;
+}
+
+.streak-daily-status-banner.completed {
+  background: #ECFDF5;
+  border: 1px solid #A7F3D0;
+  color: #065F46;
+}
+
+.streak-daily-status-banner.pending {
+  background: #FFF7ED;
+  border: 1px solid #FED7AA;
+  color: #9A3412;
+}
+
+.status-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.streak-daily-status-banner.completed .status-pulse-dot {
+  background: #10B981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25);
+}
+
+.streak-daily-status-banner.pending .status-pulse-dot {
+  background: #F97316;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(249, 115, 22, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 5px rgba(249, 115, 22, 0);
+  }
+}
+
+.status-banner-text {
+  line-height: 1.4;
+}
+
+.streak-quick-practice-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: #EA580C;
+  color: #FFFFFF;
+  border: none;
+  padding: 4px 11px;
+  border-radius: var(--radius-full, 9999px);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.15s ease;
+  white-space: nowrap;
+}
+
+.streak-quick-practice-btn:hover {
+  background: #C2410C;
+  transform: translateX(2px);
+}
+
+/* --------------------------------------------------------------------------
+   7-Day Calendar Strip
+   -------------------------------------------------------------------------- */
+.streak-days-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.streak-track-label-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.track-title {
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #92400E;
+}
+
+.track-hint {
+  font-size: 0.74rem;
+  color: #B45309;
+  font-weight: 500;
+}
+
+.streak-days-track {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  background: var(--bg-card, #FFFFFF);
+  padding: 12px;
+  border-radius: var(--radius-lg, 14px);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+.streak-day-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 8px 4px;
+  border-radius: var(--radius-md, 10px);
+  transition: all 0.2s ease;
+  border: 1.5px solid transparent;
+}
+
+.streak-day-item.is-today {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: #F59E0B;
+}
+
+.today-chip {
+  position: absolute;
+  top: -7px;
+  background: #F59E0B;
+  color: #FFFFFF;
+  font-size: 0.58rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 1px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  box-shadow: 0 1px 3px rgba(245, 158, 11, 0.3);
+}
+
+.day-name {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-secondary, #6B7280);
+}
+
+.day-date-number {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted, #9CA3AF);
+}
+
+.streak-day-item.is-today .day-name {
+  color: #92400E;
+  font-weight: 800;
+}
+
+.streak-day-item.is-today .day-date-number {
+  color: #B45309;
+  font-weight: 700;
+}
+
+.day-status-circle {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+  transition: all 0.2s ease;
+}
+
+/* Day item states */
+.streak-day-item.completed .day-status-circle {
+  background: #10B981;
+  color: #FFFFFF;
+  box-shadow: 0 2px 6px rgba(16, 185, 129, 0.35);
+}
+
+.streak-day-item.today-pending .day-status-circle {
+  background: #FFFBEB;
+  border: 2px dashed #F59E0B;
+}
+
+.today-ring-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #F59E0B;
+  animation: pulseDot 1.5s infinite;
+}
+
+.streak-day-item.pending .day-status-circle,
+.streak-day-item.missed .day-status-circle {
+  background: var(--bg-muted, #F3F4F6);
+  color: var(--text-muted, #9CA3AF);
+  border: 1px solid var(--border-light, #E5E7EB);
+}
+
+.circle-placeholder {
+  line-height: 1;
+  font-size: 0.88rem;
+}
+
+/* --------------------------------------------------------------------------
+   Milestone Progress Footer
+   -------------------------------------------------------------------------- */
+.streak-milestone-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 10px 14px;
+  border-radius: var(--radius-md, 10px);
+  border: 1px solid rgba(245, 158, 11, 0.2);
+}
+
+.milestone-text-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.78rem;
+}
+
+.milestone-goal-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #78350F;
+}
+
+.milestone-icon {
+  font-size: 0.95rem;
+}
+
+.milestone-remaining-label {
+  color: #B45309;
+  font-size: 0.76rem;
+}
+
+.goal-achieved-badge {
+  background: #ECFDF5;
+  color: #065F46;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: var(--radius-full, 9999px);
+  border: 1px solid #A7F3D0;
+}
+
+.milestone-progress-track {
+  width: 100%;
+  height: 7px;
+  background: rgba(245, 158, 11, 0.18);
+  border-radius: var(--radius-full, 9999px);
+  overflow: hidden;
+}
+
+.milestone-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #F59E0B 0%, #EA580C 100%);
+  border-radius: var(--radius-full, 9999px);
+  transition: width 0.4s ease;
+}
+
+/* --------------------------------------------------------------------------
+   Confirmation Modal for Reset Streak
+   -------------------------------------------------------------------------- */
+.streak-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  z-index: 9999;
+  animation: fadeIn 0.2s ease;
+}
+
+.streak-modal-card {
+  width: 100%;
+  max-width: 440px;
+  background: var(--bg-card, #FFFFFF);
+  border-radius: var(--radius-xl, 18px);
+  border: 1px solid var(--border-light, #E2E8F0);
+  padding: 24px;
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  animation: scaleUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.streak-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.modal-alert-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: #FEE2E2;
+  color: #DC2626;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.streak-modal-header h3 {
+  font-family: var(--font-display, sans-serif);
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--text-primary, #0F172A);
+  margin: 0;
+  flex: 1;
+}
+
+.streak-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #94A3B8);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease;
+}
+
+.streak-modal-close:hover {
+  color: var(--text-primary, #0F172A);
+}
+
+.streak-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.streak-modal-body p {
+  font-size: 0.88rem;
+  color: var(--text-secondary, #475569);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.modal-safe-box {
+  background: #F8FAFC;
+  border: 1px solid #E2E8F0;
+  border-radius: var(--radius-md, 10px);
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.safe-box-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: #334155;
+  line-height: 1.4;
+}
+
+.safe-check {
+  color: #10B981;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.streak-modal-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+.modal-cancel-btn {
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-md, 8px);
+  cursor: pointer;
+}
+
+.modal-confirm-reset-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #DC2626;
+  color: #FFFFFF;
+  border: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-md, 8px);
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.modal-confirm-reset-btn:hover {
+  background: #B91C1C;
+}
+
+/* --------------------------------------------------------------------------
+   Dark Mode Adaptations
+   -------------------------------------------------------------------------- */
+[data-theme="dark"] .streak-card-component {
+  background: linear-gradient(135deg, #1E1A11 0%, #292010 50%, #2D1D0F 100%);
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.5), 0 0 15px rgba(245, 158, 11, 0.08);
+}
+
+[data-theme="dark"] .streak-card-component:hover {
+  box-shadow: 0 12px 30px -4px rgba(0, 0, 0, 0.6), 0 0 20px rgba(245, 158, 11, 0.14);
+}
+
+[data-theme="dark"] .streak-count-number,
+[data-theme="dark"] .streak-count-unit {
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .streak-subtitle-text {
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-record-pill {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(245, 158, 11, 0.35);
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .streak-record-pill .record-label {
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-record-pill .record-value {
+  color: #FEF3C7;
+}
+
+[data-theme="dark"] .streak-advance-test-btn {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(245, 158, 11, 0.5);
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-advance-test-btn:hover {
+  background: rgba(245, 158, 11, 0.2);
+  color: #FEF3C7;
+}
+
+[data-theme="dark"] .streak-reset-btn {
+  background: rgba(30, 41, 59, 0.8);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #F87171;
+}
+
+[data-theme="dark"] .streak-reset-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #FCA5A5;
+}
+
+[data-theme="dark"] .streak-daily-status-banner.completed {
+  background: rgba(6, 78, 59, 0.4);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #6EE7B7;
+}
+
+[data-theme="dark"] .streak-daily-status-banner.pending {
+  background: rgba(120, 53, 15, 0.4);
+  border-color: rgba(249, 115, 22, 0.4);
+  color: #FDBA74;
+}
+
+[data-theme="dark"] .track-title {
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .track-hint {
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-days-track {
+  background: rgba(15, 23, 42, 0.7);
+  border-color: rgba(245, 158, 11, 0.25);
+}
+
+[data-theme="dark"] .streak-day-item.is-today {
+  background: rgba(245, 158, 11, 0.18);
+  border-color: #F59E0B;
+}
+
+[data-theme="dark"] .streak-day-item.is-today .day-name {
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .streak-day-item.is-today .day-date-number {
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-day-item.today-pending .day-status-circle {
+  background: rgba(245, 158, 11, 0.15);
+  border-color: #F59E0B;
+}
+
+[data-theme="dark"] .streak-day-item.pending .day-status-circle,
+[data-theme="dark"] .streak-day-item.missed .day-status-circle {
+  background: rgba(30, 41, 59, 0.6);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-theme="dark"] .streak-milestone-footer {
+  background: rgba(30, 41, 59, 0.5);
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+[data-theme="dark"] .milestone-goal-name {
+  color: #FDE68A;
+}
+
+[data-theme="dark"] .milestone-remaining-label {
+  color: #FCD34D;
+}
+
+[data-theme="dark"] .streak-modal-card {
+  background: #0F172A;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .modal-safe-box {
+  background: #1E293B;
+  border-color: #334155;
+}
+
+[data-theme="dark"] .safe-box-item {
+  color: #E2E8F0;
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Breakpoints
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+  .streak-card-component {
+    padding: 16px;
+    gap: 12px;
+  }
+
+  .streak-header-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .streak-header-actions {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .streak-days-track {
+    gap: 4px;
+    padding: 8px 4px;
+  }
+
+  .streak-day-item {
+    padding: 6px 2px;
+  }
+
+  .day-name {
+    font-size: 0.68rem;
+  }
+
+  .day-date-number {
+    font-size: 0.62rem;
+  }
+
+  .day-status-circle {
+    width: 22px;
+    height: 22px;
+  }
+}

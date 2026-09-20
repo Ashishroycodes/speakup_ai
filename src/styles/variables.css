@@ -1,0 +1,259 @@
+/* ========================================================================
+   SpeakUp Design Tokens & Comprehensive 4-Theme System
+   ======================================================================== */
+
+:root, [data-theme="light"] {
+  /* Brand Core Colors */
+  --primary: #4F46E5;
+  --primary-accent: #4F46E5;
+  --primary-hover: #4338CA;
+  --primary-light: #EEF2FF;
+  --primary-glow: rgba(79, 70, 229, 0.25);
+
+  --secondary: #7C3AED;
+  --secondary-hover: #6D28D9;
+  --secondary-light: #F5F3FF;
+
+  --accent-cyan: #06B6D4;
+  --accent-cyan-light: #ECFEFF;
+  
+  --accent-emerald: #10B981;
+  --accent-emerald-light: #ECFDF5;
+
+  --accent-amber: #F59E0B;
+  --accent-amber-light: #FFFBEB;
+
+  --accent-rose: #EF4444;
+  --accent-rose-light: #FEF2F2;
+
+  /* Surfaces & Backgrounds */
+  --bg-main: #F8FAFC;
+  --bg-card: #FFFFFF;
+  --bg-surface: #FFFFFF;
+  --card-bg: #FFFFFF;
+  --bg-muted: #F1F5F9;
+  --bg-subtle: #F8FAFC;
+
+  --nav-bg: rgba(248, 250, 252, 0.85);
+  --nav-scrolled-bg: rgba(255, 255, 255, 0.95);
+  --hero-gradient: radial-gradient(100% 100% at 50% 0%, rgba(238, 242, 255, 0.7) 0%, rgba(248, 250, 252, 1) 100%);
+  --hero-glow-1: #C7D2FE;
+  --hero-glow-2: #E0E7FF;
+  --illustration-card-bg: linear-gradient(145deg, #FFFFFF 0%, #F8FAFC 100%);
+  --floating-badge-bg: rgba(255, 255, 255, 0.95);
+
+  /* Typography */
+  --text-primary: #0F172A;
+  --text-main: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --text-inverse: #FFFFFF;
+
+  /* Borders & Dividers */
+  --border-light: #E2E8F0;
+  --border-color: #E2E8F0;
+  --border-focus: #818CF8;
+
+  /* Typography Fonts */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', var(--font-sans);
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.03);
+  --shadow-xl: 0 20px 30px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.05);
+  --shadow-primary: 0 12px 24px -6px rgba(79, 70, 229, 0.35);
+  --shadow-primary-lg: 0 20px 35px -8px rgba(79, 70, 229, 0.45);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container-max-width: 1200px;
+  --navbar-height: 72px;
+}
+
+/* ========================================================================
+   1. Midnight Dark Theme
+   ======================================================================== */
+[data-theme="dark"] {
+  --primary: #6366F1;
+  --primary-accent: #6366F1;
+  --primary-hover: #4F46E5;
+  --primary-light: rgba(99, 102, 241, 0.18);
+  --primary-glow: rgba(99, 102, 241, 0.35);
+
+  --secondary: #8B5CF6;
+  --secondary-hover: #7C3AED;
+  --secondary-light: rgba(139, 92, 246, 0.18);
+
+  --accent-cyan: #38BDF8;
+  --accent-cyan-light: rgba(56, 189, 248, 0.15);
+
+  --accent-emerald: #34D399;
+  --accent-emerald-light: rgba(52, 211, 153, 0.15);
+
+  --accent-amber: #FBBF24;
+  --accent-amber-light: rgba(251, 191, 36, 0.15);
+
+  --accent-rose: #F87171;
+  --accent-rose-light: rgba(248, 113, 113, 0.15);
+
+  /* Deep obsidian & slate surfaces */
+  --bg-main: #0B0F19;
+  --bg-card: #131B2E;
+  --bg-surface: #131B2E;
+  --card-bg: #131B2E;
+  --bg-muted: #1E293B;
+  --bg-subtle: #0F172A;
+
+  --nav-bg: rgba(11, 15, 25, 0.85);
+  --nav-scrolled-bg: rgba(19, 27, 46, 0.95);
+  --hero-gradient: radial-gradient(100% 100% at 50% 0%, rgba(99, 102, 241, 0.2) 0%, rgba(11, 15, 25, 1) 100%);
+  --hero-glow-1: rgba(99, 102, 241, 0.3);
+  --hero-glow-2: rgba(139, 92, 246, 0.25);
+  --illustration-card-bg: linear-gradient(145deg, #131B2E 0%, #1A243B 100%);
+  --floating-badge-bg: rgba(19, 27, 46, 0.92);
+
+  --text-primary: #F8FAFC;
+  --text-main: #F8FAFC;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+  --text-inverse: #0B0F19;
+
+  --border-light: rgba(255, 255, 255, 0.1);
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-focus: #818CF8;
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 20px 35px -5px rgba(0, 0, 0, 0.8);
+}
+
+/* ========================================================================
+   2. Sepia Warm Focus Theme
+   ======================================================================== */
+[data-theme="sepia"] {
+  --primary: #D97706;
+  --primary-accent: #D97706;
+  --primary-hover: #B45309;
+  --primary-light: rgba(217, 119, 6, 0.2);
+  --primary-glow: rgba(217, 119, 6, 0.4);
+
+  --secondary: #B45309;
+  --secondary-hover: #92400E;
+  --secondary-light: rgba(180, 83, 9, 0.2);
+
+  --accent-cyan: #0D9488;
+  --accent-cyan-light: rgba(13, 148, 136, 0.18);
+
+  --accent-emerald: #059669;
+  --accent-emerald-light: rgba(5, 150, 105, 0.18);
+
+  --accent-amber: #F59E0B;
+  --accent-amber-light: rgba(245, 158, 11, 0.18);
+
+  --accent-rose: #E11D48;
+  --accent-rose-light: rgba(225, 29, 72, 0.18);
+
+  /* Warm stone & amber tones */
+  --bg-main: #1C1917;
+  --bg-card: #292524;
+  --bg-surface: #292524;
+  --card-bg: #292524;
+  --bg-muted: #44403C;
+  --bg-subtle: #1C1917;
+
+  --nav-bg: rgba(28, 25, 23, 0.85);
+  --nav-scrolled-bg: rgba(41, 37, 36, 0.95);
+  --hero-gradient: radial-gradient(100% 100% at 50% 0%, rgba(217, 119, 6, 0.22) 0%, rgba(28, 25, 23, 1) 100%);
+  --hero-glow-1: rgba(217, 119, 6, 0.3);
+  --hero-glow-2: rgba(180, 83, 9, 0.25);
+  --illustration-card-bg: linear-gradient(145deg, #292524 0%, #35302E 100%);
+  --floating-badge-bg: rgba(41, 37, 36, 0.92);
+
+  --text-primary: #FEF3C7;
+  --text-main: #FEF3C7;
+  --text-secondary: #E7E5E4;
+  --text-muted: #A8A29E;
+  --text-inverse: #1C1917;
+
+  --border-light: rgba(254, 243, 199, 0.14);
+  --border-color: rgba(254, 243, 199, 0.14);
+  --border-focus: #F59E0B;
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 25px -4px rgba(0, 0, 0, 0.6);
+  --shadow-xl: 0 20px 35px -5px rgba(0, 0, 0, 0.7);
+}
+
+/* ========================================================================
+   3. Ocean Marine Theme
+   ======================================================================== */
+[data-theme="ocean"] {
+  --primary: #06B6D4;
+  --primary-accent: #06B6D4;
+  --primary-hover: #0891B2;
+  --primary-light: rgba(6, 182, 212, 0.2);
+  --primary-glow: rgba(6, 182, 212, 0.4);
+
+  --secondary: #0284C7;
+  --secondary-hover: #0369A1;
+  --secondary-light: rgba(2, 132, 199, 0.2);
+
+  --accent-cyan: #22D3EE;
+  --accent-cyan-light: rgba(34, 211, 238, 0.18);
+
+  --accent-emerald: #10B981;
+  --accent-emerald-light: rgba(16, 185, 129, 0.18);
+
+  --accent-amber: #FBBF24;
+  --accent-amber-light: rgba(251, 191, 36, 0.18);
+
+  --accent-rose: #FB7185;
+  --accent-rose-light: rgba(251, 113, 133, 0.18);
+
+  /* Deep sea navy & cyan glow */
+  --bg-main: #04131F;
+  --bg-card: #0A2239;
+  --bg-surface: #0A2239;
+  --card-bg: #0A2239;
+  --bg-muted: #123352;
+  --bg-subtle: #06192A;
+
+  --nav-bg: rgba(4, 19, 31, 0.85);
+  --nav-scrolled-bg: rgba(10, 34, 57, 0.95);
+  --hero-gradient: radial-gradient(100% 100% at 50% 0%, rgba(6, 182, 212, 0.22) 0%, rgba(4, 19, 31, 1) 100%);
+  --hero-glow-1: rgba(6, 182, 212, 0.35);
+  --hero-glow-2: rgba(2, 132, 199, 0.28);
+  --illustration-card-bg: linear-gradient(145deg, #0A2239 0%, #0E2C4A 100%);
+  --floating-badge-bg: rgba(10, 34, 57, 0.92);
+
+  --text-primary: #E0F2FE;
+  --text-main: #E0F2FE;
+  --text-secondary: #BAE6FD;
+  --text-muted: #7DD3FC;
+  --text-inverse: #04131F;
+
+  --border-light: rgba(6, 182, 212, 0.2);
+  --border-color: rgba(6, 182, 212, 0.2);
+  --border-focus: #06B6D4;
+
+  --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.5);
+  --shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.6);
+  --shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.7);
+  --shadow-xl: 0 20px 35px -5px rgba(0, 0, 0, 0.8);
+}
+

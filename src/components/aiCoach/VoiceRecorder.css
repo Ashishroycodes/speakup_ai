@@ -1,0 +1,46 @@
+.voice-recorder-wrap {
+  display: flex;
+  align-items: center;
+}
+
+.voice-record-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--bg-muted);
+  border: 1.5px solid var(--border-light);
+  color: var(--text-secondary);
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-fast);
+  position: relative;
+}
+
+.voice-record-btn:hover:not(:disabled) {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: var(--bg-card, #FFFFFF);
+}
+
+.voice-record-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.voice-record-btn.recording {
+  background: var(--accent-rose-light);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: var(--accent-rose);
+  font-weight: 700;
+}
+
+.live-mic-pulse {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #EF4444;
+  animation: liveDot 1s infinite;
+}

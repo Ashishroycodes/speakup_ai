@@ -1,0 +1,240 @@
+.vocabulary-section {
+  padding: 60px 0 80px;
+  background-color: var(--bg-main);
+}
+
+.section-badge-cyan {
+  background: var(--accent-cyan-light);
+  color: #0891B2;
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+/* WOTD Banner Card */
+.wotd-banner-card {
+  max-width: 960px;
+  margin: 0 auto 48px;
+  background: var(--bg-card, #FFFFFF);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+}
+
+.wotd-banner-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #06B6D4 0%, #3B82F6 50%, #4F46E5 100%);
+}
+
+.wotd-card-inner {
+  display: grid;
+  grid-template-columns: 1.4fr 0.7fr;
+  padding: 36px 40px;
+  gap: 36px;
+}
+
+.wotd-content-side {
+  display: flex;
+  flex-direction: column;
+}
+
+.wotd-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.wotd-label-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-cyan-light);
+  color: #0891B2;
+  font-size: 0.8rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+}
+
+.wotd-category-tag {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  background: var(--primary-light);
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+}
+
+.wotd-phonetic {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.wotd-word-heading-row {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.wotd-word-title {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.wotd-pos-chip {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+.wotd-meaning-box, .wotd-example-box {
+  margin-bottom: 12px;
+}
+
+.wotd-meaning-box strong, .wotd-example-box strong {
+  display: block;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.wotd-meaning-box p {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.wotd-example-box p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.wotd-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 16px;
+  flex-wrap: wrap;
+}
+
+.learned-state {
+  background: var(--accent-emerald-light);
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+/* Right accent column */
+.wotd-accent-side {
+  background: linear-gradient(160deg, #ECFEFF 0%, #E0F2FE 100%);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.wotd-stat-circle {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: var(--bg-card, #FFFFFF);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(6, 182, 212, 0.2);
+  margin-bottom: 16px;
+  border: 2px solid rgba(6, 182, 212, 0.3);
+}
+
+.wotd-stat-val {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0891B2;
+  line-height: 1.1;
+}
+
+.wotd-stat-lbl {
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.wotd-tip-note {
+  font-size: 0.82rem;
+  color: #0E7490;
+  line-height: 1.4;
+}
+
+/* Toolbar & Grid */
+.vocab-toolbar {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+
+.vocab-filter-tabs {
+  display: flex;
+  background: var(--bg-card, #FFFFFF);
+  padding: 4px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  gap: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.filter-tab {
+  background: transparent;
+  border: none;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.filter-tab:hover {
+  color: var(--text-primary);
+}
+
+.filter-tab.active {
+  background: var(--primary-light);
+  color: var(--primary);
+  font-weight: 700;
+}
+
+.vocab-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+@media (max-width: 860px) {
+  .wotd-card-inner {
+    grid-template-columns: 1fr;
+    padding: 28px 24px;
+  }
+}

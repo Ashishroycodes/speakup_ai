@@ -1,0 +1,163 @@
+.chat-message-row {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+  animation: fadeIn 0.25s ease;
+}
+
+.chat-message-row.user-row {
+  flex-direction: row-reverse;
+}
+
+.message-avatar-bubble {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-light);
+}
+
+.ai-row .message-avatar-bubble {
+  background: linear-gradient(135deg, #EEF2FF 0%, #E0E7FF 100%);
+  border-color: rgba(79, 70, 229, 0.25);
+}
+
+.user-row .message-avatar-bubble {
+  background: linear-gradient(135deg, #ECFEFF 0%, #E0F2FE 100%);
+  border-color: rgba(6, 182, 212, 0.25);
+}
+
+.message-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  max-width: 80%;
+}
+
+.user-row .message-content-wrapper {
+  align-items: flex-end;
+}
+
+.message-header-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 0.78rem;
+}
+
+.sender-name {
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.message-time {
+  color: var(--text-muted);
+}
+
+.tts-speaker-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-full);
+  padding: 2px 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.tts-speaker-btn:hover {
+  background: var(--primary-light);
+}
+
+.tts-speaker-btn.active-playing {
+  background: var(--accent-rose-light);
+  color: var(--accent-rose);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.improve-sentence-shortcut-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  border: none;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-cyan);
+  cursor: pointer;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.improve-sentence-shortcut-btn:hover {
+  background: var(--accent-cyan-light);
+  text-decoration: underline;
+}
+
+/* Bubbles */
+.message-bubble {
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  line-height: 1.55;
+  font-size: 0.96rem;
+  word-break: break-word;
+}
+
+.ai-bubble {
+  background: var(--bg-card, #FFFFFF);
+  color: var(--text-primary);
+  border: 1.5px solid var(--border-light);
+  border-top-left-radius: 4px;
+  box-shadow: var(--shadow-sm);
+}
+
+.user-bubble {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: #FFFFFF;
+  border-top-right-radius: 4px;
+  box-shadow: 0 4px 14px -2px rgba(79, 70, 229, 0.3);
+}
+
+/* Gentle Coach Tip box */
+.gentle-correction-box {
+  margin-top: 8px;
+  background: var(--accent-amber-light);
+  border: 1px dashed rgba(245, 158, 11, 0.4);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  max-width: 480px;
+}
+
+.correction-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #B45309;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.better-text {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #92400E;
+}
+
+.correction-explain {
+  font-size: 0.8rem;
+  color: #78350F;
+  margin-top: 2px;
+}

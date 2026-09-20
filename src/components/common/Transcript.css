@@ -1,0 +1,132 @@
+.transcript-component {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.transcript-top-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.transcript-header-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.transcript-icon {
+  color: var(--primary);
+}
+
+.transcript-header-label h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent-rose-light);
+  color: var(--accent-rose);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.live-indicator-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent-rose);
+  animation: liveDot 1s infinite;
+}
+
+.transcript-quick-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.action-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  border: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: var(--transition-fast);
+}
+
+.action-link-btn:hover {
+  color: var(--text-primary);
+  background: var(--bg-muted);
+}
+
+.try-again-link {
+  color: var(--primary);
+}
+
+.try-again-link:hover {
+  color: var(--primary-hover);
+  background: var(--primary-light);
+}
+
+/* Textarea input */
+.transcript-display-card {
+  position: relative;
+  background: var(--bg-card, #FFFFFF);
+  border-radius: var(--radius-md);
+  border: 1.5px solid var(--border-light);
+  transition: var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.transcript-display-card:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+.transcript-textarea-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 16px;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.6;
+  resize: vertical;
+  min-height: 110px;
+}
+
+.transcript-textarea-input:focus {
+  outline: none;
+}
+
+.transcript-bottom-note {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.note-sparkle {
+  color: var(--accent-amber);
+  flex-shrink: 0;
+}
