@@ -62,6 +62,13 @@ export default async function handler(req, res) {
     return res.end();
   }
 
+  res.status = res.status || ((code) => { res.statusCode = code; return res; });
+  res.json = res.json || ((data) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+    return res;
+  });
+
   // Support GET to check Realtime API status/availability
   if (req.method === 'GET') {
     const apiKey = (process.env.OPENAI_API_KEY || process.env.AI_API_KEY || '').trim();
@@ -80,7 +87,12 @@ export default async function handler(req, res) {
     });
   }
 
-  const body = req.body || {};
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
+
   const {
     voice = 'nova',
     language = 'auto',

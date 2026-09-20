@@ -23,7 +23,7 @@ function resolvePathname(req, prefix) {
     return `${prefix}/${cleanSubpath}`;
   }
 
-  const matched = req.headers['x-matched-path'] || urlObj.pathname;
+  const matched = (req.headers && req.headers['x-matched-path']) || urlObj.pathname;
   if (matched && matched.startsWith(prefix)) {
     return matched.replace(/\/+$/, '');
   }

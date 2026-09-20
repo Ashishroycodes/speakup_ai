@@ -151,15 +151,40 @@ function evaluateLocally({ word = '', sentence = '', _prompt = '' }) {
 export default async function handler(req, res) {
   ensureEnvLoaded();
 
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method Not Allowed. Use POST.' });
+  if (res.setHeader) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
+
+  if (req.method === 'OPTIONS') {
+    if (res.status) return res.status(204).end();
+    res.statusCode = 204;
+    return res.end();
+  }
+
+  res.status = res.status || ((code) => { res.statusCode = code; return res; });
+  res.json = res.json || ((data) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+    return res;
+  });
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed. Use POST.', code: 'METHOD_NOT_ALLOWED' });
+  }
+
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
 
   const {
     word = '',
     sentence = '',
     prompt = ''
-  } = req.body || {};
+  } = body;
 
   if (!sentence || !sentence.trim()) {
     return res.status(400).json({ error: 'Sentence cannot be empty' });

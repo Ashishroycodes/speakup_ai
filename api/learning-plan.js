@@ -415,16 +415,37 @@ function generateDeterministicWeeklyReport(params) {
 // -------------------------------------------------------------------------
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.writeHead(405, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ error: 'Method Not Allowed. Use POST.' }));
-    return;
-  }
-
   ensureEnvLoaded();
 
+  if (res.setHeader) {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  }
+
+  if (req.method === 'OPTIONS') {
+    if (res.status) return res.status(204).end();
+    res.statusCode = 204;
+    return res.end();
+  }
+
+  res.status = res.status || ((code) => { res.statusCode = code; return res; });
+  res.json = res.json || ((data) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+    return res;
+  });
+
+  if (req.method !== 'POST') {
+    return res.status(405).json({ error: 'Method Not Allowed. Use POST.', code: 'METHOD_NOT_ALLOWED' });
+  }
+
   const apiKey = process.env.GEMINI_API_KEY || process.env.AI_API_KEY || process.env.OPENAI_API_KEY || '';
-  const body = req.body || {};
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
   const action = body.action || 'generate-plan';
 
   // Handle action: ask-coach
@@ -432,9 +453,7 @@ export default async function handler(req, res) {
     const question = body.question || 'What should I practice today?';
     if (!apiKey || apiKey.toLowerCase() === 'demo' || apiKey.toLowerCase() === 'mock') {
       const answer = generateDeterministicCoachAnswer(question, body);
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify({ question, answer }));
-      return;
+      return res.status(200).json({ question, answer });
     }
 
     try {
@@ -448,10 +467,11 @@ Student metrics:
 - Scores: ${JSON.stringify(body.communicationScores || {})}
 - Primary Goals: ${JSON.stringify(body.goals || [])}
 - Preferred Language: ${body.preferredLanguage || 'English'}
+- Weakest Skills: ${JSON.stringify(body.weakestSkills || [])}
 
-User Question: "${question}"
+The student asks you: "${question}"
 
-Answer the user directly in 2-3 friendly, actionable sentences. Tailor the advice to their actual metrics. If preferredLanguage is Hinglish, explain naturally in conversational Hinglish. Output plain text only.`;
+Provide a 2 to 3 sentence concise, warm, actionable coaching answer. Be practical and encouraging. Focus on daily practice. If question mentions Hindi or Hinglish, answer in polite, natural Hinglish.`;
 
         const r = await fetch(url, {
           method: 'POST',
@@ -466,9 +486,7 @@ Answer the user directly in 2-3 friendly, actionable sentences. Tailor the advic
           const data = await r.json();
           const answer = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim();
           if (answer) {
-            res.writeHead(200, { 'Content-Type': 'application/json' });
-            res.end(JSON.stringify({ question, answer }));
-            return;
+            return res.status(200).json({ question, answer });
           }
         }
       }
@@ -477,34 +495,26 @@ Answer the user directly in 2-3 friendly, actionable sentences. Tailor the advic
     }
 
     const answer = generateDeterministicCoachAnswer(question, body);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ question, answer }));
-    return;
+    return res.status(200).json({ question, answer });
   }
 
   // Handle action: weekly-report
   if (action === 'weekly-report') {
     const report = generateDeterministicWeeklyReport(body);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(report));
-    return;
+    return res.status(200).json(report);
   }
 
   // Handle action: practice-now
   if (action === 'practice-now') {
     const plan = generateDeterministicFallbackPlan(body);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify({ practiceNow: plan.practiceNow }));
-    return;
+    return res.status(200).json({ practiceNow: plan.practiceNow });
   }
 
   // Default action: generate-plan
   // If no API key configured, return high quality deterministic plan immediately
   if (!apiKey || apiKey.toLowerCase() === 'demo' || apiKey.toLowerCase() === 'mock') {
     const fallbackPlan = generateDeterministicFallbackPlan(body);
-    res.writeHead(200, { 'Content-Type': 'application/json' });
-    res.end(JSON.stringify(fallbackPlan));
-    return;
+    return res.status(200).json(fallbackPlan);
   }
 
   const isGemini = apiKey.startsWith('AQ.') || apiKey.startsWith('AIzaSy') || !!process.env.GEMINI_API_KEY;
@@ -634,9 +644,7 @@ Generate the personalized adaptive learning plan JSON with this exact schema:
       const parsedPlan = JSON.parse(cleaned);
       parsedPlan.isAiGenerated = true;
 
-      res.writeHead(200, { 'Content-Type': 'application/json' });
-      res.end(JSON.stringify(parsedPlan));
-      return;
+      return res.status(200).json(parsedPlan);
     }
   } catch (err) {
     console.warn('Learning plan AI generation error, using fallback:', err.message);
@@ -644,6 +652,5 @@ Generate the personalized adaptive learning plan JSON with this exact schema:
 
   // Graceful fallback
   const fallback = generateDeterministicFallbackPlan(body);
-  res.writeHead(200, { 'Content-Type': 'application/json' });
-  res.end(JSON.stringify(fallback));
+  return res.status(200).json(fallback);
 }

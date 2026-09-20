@@ -154,6 +154,13 @@ export default async function handler(req, res) {
     return res.end();
   }
 
+  res.status = res.status || ((code) => { res.statusCode = code; return res; });
+  res.json = res.json || ((data) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+    return res;
+  });
+
   // 1. Only allow POST requests
   if (req.method !== 'POST') {
     return res.status(405).json({
@@ -163,7 +170,12 @@ export default async function handler(req, res) {
   }
 
   // 2. Validate Request Body
-  const body = req.body || {};
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
+
   const {
     message,
     history = [],

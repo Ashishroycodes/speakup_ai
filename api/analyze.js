@@ -104,11 +104,23 @@ export default async function handler(req, res) {
     return res.end();
   }
 
+  res.status = res.status || ((code) => { res.statusCode = code; return res; });
+  res.json = res.json || ((data) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.end(JSON.stringify(data));
+    return res;
+  });
+
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed. Use POST.', code: 'METHOD_NOT_ALLOWED' });
   }
 
-  const body = req.body || {};
+  let body = req.body;
+  if (typeof body === 'string') {
+    try { body = JSON.parse(body); } catch { body = {}; }
+  }
+  body = body || {};
+
   const {
     messages = [],
     durationSeconds = 60,

@@ -6,7 +6,6 @@
     { "source": "/api/teacher/:path*", "destination": "/api/teacher?subpath=:path*" },
     { "source": "/api/users/:path*", "destination": "/api/users?subpath=:path*" },
     { "source": "/api/realtime/session", "destination": "/api/realtime-session" },
-    { "source": "/api/:path*", "destination": "/api/:path*" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }
