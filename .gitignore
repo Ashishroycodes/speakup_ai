@@ -34,3 +34,7 @@ data/mysql/
 *.sqlite
 *.sqlite3
 scratch/
+.wrangler/
+_worker.bundle/
+_worker.bundle
+_worker.js
