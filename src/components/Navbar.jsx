@@ -351,7 +351,7 @@ export default function Navbar({
           <button
             type="button"
             className="nav-mobile-toggle-btn"
-            onClick={() => setMobileDrawerOpen(true)}
+            onClick={handleMenuClick}
             aria-label="Open Navigation Menu"
             title="Open Menu"
             id="navbar-mobile-toggle"

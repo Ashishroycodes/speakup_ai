@@ -10,9 +10,9 @@
     "preview": "vite preview",
     "server": "node server.js",
     "start": "node server.js",
-    "db:status": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => console.log(JSON.stringify(await m.getDatabaseStatus(), null, 2)))\"",
-    "db:users": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => console.table(await m.db.query('SELECT id, name, email, role, created_at, last_login FROM users')))\"",
-    "db:mysql-test": "node --env-file=.env -e \"import('./backend/config/mysql.js').then(async m => { console.log('Testing MySQL connection...'); try { await m.initMysqlDatabase(); console.log('MySQL Status:', await m.getMysqlStatus()); } catch(e) { console.error('MySQL Connection Failed:', e.message); } })\""
+    "db:status": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => { console.log(JSON.stringify(await m.getDatabaseStatus(), null, 2)); process.exit(0); }).catch(e => { console.error(e); process.exit(1); })\"",
+    "db:users": "node --env-file=.env -e \"import('./backend/config/database.js').then(async m => { console.table(await m.db.query('SELECT id, name, email, role, created_at, last_login FROM users')); process.exit(0); }).catch(e => { console.error(e); process.exit(1); })\"",
+    "db:mysql-test": "node --env-file=.env -e \"import('./backend/config/mysql.js').then(async m => { console.log('Testing MySQL connection...'); try { await m.initMysqlDatabase(); console.log('MySQL Status:', await m.getMysqlStatus()); process.exit(0); } catch(e) { console.error('MySQL Connection Failed:', e.message); process.exit(1); } }).catch(e => { console.error(e); process.exit(1); })\""
   },
   "dependencies": {
     "lucide-react": "^1.46.0",

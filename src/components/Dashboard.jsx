@@ -1,6 +1,7 @@
 import React from 'react';
 import { Mic, BookOpen, Flame, ArrowRight, Zap, GraduationCap, Calendar, Sparkles } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import StreakCard from './common/StreakCard.jsx';
 import './Dashboard.css';
 
 export default function Dashboard({ 
@@ -135,6 +136,20 @@ export default function Dashboard({
           </div>
         )}
 
+
+        {/* 7-Day Consistency Streak Tracker */}
+        <div className="dashboard-streak-wrapper">
+          <StreakCard
+            streak={streak}
+            longestStreak={longestStreak}
+            streakDays={streakDays}
+            lastPracticeDate={lastPracticeDate}
+            xp={xp}
+            onResetStreak={onResetStreak}
+            onAdvanceStreak={onAdvanceStreak}
+            onStartPractice={onStartPractice}
+          />
+        </div>
 
         {/* 3 Simple Cards Grid */}
         <div className="dashboard-cards-grid">

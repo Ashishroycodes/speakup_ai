@@ -28,6 +28,12 @@ export default async function teacherRoutes(req, res, pathname) {
     }
   }
 
+  if (pathname.startsWith('/api/teacher/assignments/') && req.method === 'DELETE') {
+    const assignmentId = pathname.replace('/api/teacher/assignments/', '').trim();
+    req.params = { id: assignmentId };
+    return TeacherController.deleteAssignment(req, res);
+  }
+
   if (pathname === '/api/teacher/profile') {
     if (req.method === 'GET') {
       return TeacherController.getProfile(req, res);

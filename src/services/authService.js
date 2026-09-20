@@ -217,6 +217,15 @@ export const authService = {
   },
 
   /**
+   * Teacher: Delete Assignment by ID
+   */
+  async deleteAssignment(assignmentId) {
+    return this.request(`/api/teacher/assignments/${encodeURIComponent(assignmentId)}`, {
+      method: 'DELETE'
+    });
+  },
+
+  /**
    * Teacher: Update Profile
    */
   async updateTeacherProfile(profileData) {

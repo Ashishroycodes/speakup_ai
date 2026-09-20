@@ -418,7 +418,7 @@ export default function Hero({
                 </div>
                 <div>
                   <div className="badge-title">Daily Practice</div>
-                  <div className="badge-value">Build Consistency</div>
+                  <div className="badge-value">{streak} Day Streak</div>
                 </div>
               </div>
             </div>

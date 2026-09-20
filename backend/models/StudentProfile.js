@@ -33,6 +33,16 @@ async function execute(sql, params = []) {
   return null;
 }
 
+function safeJsonParse(val, fallback) {
+  if (!val) return fallback;
+  if (typeof val === 'object') return val;
+  try {
+    return JSON.parse(val);
+  } catch {
+    return fallback;
+  }
+}
+
 export const StudentProfileModel = {
   async findByUserId(userId) {
     if (!userId) return null;
@@ -47,9 +57,9 @@ export const StudentProfileModel = {
 
     return {
       ...row,
-      streakDays: row.streak_days_json ? JSON.parse(row.streak_days_json) : {},
-      skills: row.skills_json ? JSON.parse(row.skills_json) : {},
-      learnedVocab: row.learned_vocab_json ? JSON.parse(row.learned_vocab_json) : []
+      streakDays: safeJsonParse(row.streak_days_json, {}),
+      skills: safeJsonParse(row.skills_json, {}),
+      learnedVocab: safeJsonParse(row.learned_vocab_json, [])
     };
   },
 
@@ -146,9 +156,9 @@ export const StudentProfileModel = {
 
     return rows.map((row) => ({
       ...row,
-      streakDays: row.streak_days_json ? JSON.parse(row.streak_days_json) : {},
-      skills: row.skills_json ? JSON.parse(row.skills_json) : {},
-      learnedVocab: row.learned_vocab_json ? JSON.parse(row.learned_vocab_json) : []
+      streakDays: safeJsonParse(row.streak_days_json, {}),
+      skills: safeJsonParse(row.skills_json, {}),
+      learnedVocab: safeJsonParse(row.learned_vocab_json, [])
     }));
   }
 };

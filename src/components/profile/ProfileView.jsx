@@ -7,7 +7,6 @@ import {
   Calendar,
   Target,
   Award,
-  Flame,
   CheckCircle2,
   AlertCircle,
   Building2,

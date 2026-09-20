@@ -152,6 +152,32 @@ export const TeacherController = {
   },
 
   /**
+   * Delete assignment by ID (teacher only)
+   */
+  async deleteAssignment(req, res) {
+    try {
+      const { id } = req.params || {};
+      if (!id) {
+        return res.status(400).json({ success: false, message: 'Assignment ID is required.' });
+      }
+
+      const { AssignmentModel } = await import(`../models/Assignment.js?t=${Date.now()}`);
+      await AssignmentModel.delete(id, req.user.id);
+
+      return res.status(200).json({
+        success: true,
+        message: 'Assignment deleted successfully.'
+      });
+    } catch (err) {
+      console.error('deleteAssignment error:', err);
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to delete assignment.'
+      });
+    }
+  },
+
+  /**
    * Get authenticated teacher's profile
    */
   async getProfile(req, res) {
