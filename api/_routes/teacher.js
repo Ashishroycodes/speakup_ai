@@ -1,4 +1,4 @@
-import teacherRoutes from '../backend/routes/teacher.js';
+import teacherRoutes from '../../backend/routes/teacher.js';
 
 async function parseBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;

@@ -69,7 +69,7 @@ export default async function handler(req, res) {
 
   let databaseStatus = { connected: false };
   try {
-    const { getDatabaseStatus } = await import('../backend/config/database.js');
+    const { getDatabaseStatus } = await import('../../backend/config/database.js');
     databaseStatus = await getDatabaseStatus();
   } catch (err) {
     databaseStatus = { connected: false, error: err.message };

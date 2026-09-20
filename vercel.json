@@ -1,11 +1,7 @@
 {
   "framework": "vite",
   "rewrites": [
-    { "source": "/api/auth/:path*", "destination": "/api/auth?subpath=:path*" },
-    { "source": "/api/student/:path*", "destination": "/api/student?subpath=:path*" },
-    { "source": "/api/teacher/:path*", "destination": "/api/teacher?subpath=:path*" },
-    { "source": "/api/users/:path*", "destination": "/api/users?subpath=:path*" },
-    { "source": "/api/realtime/session", "destination": "/api/realtime-session" },
+    { "source": "/api/:path*", "destination": "/api/index.js" },
     { "source": "/((?!api/).*)", "destination": "/index.html" }
   ]
 }

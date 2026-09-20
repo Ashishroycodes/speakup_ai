@@ -1,4 +1,4 @@
-import authRoutes from '../backend/routes/auth.js';
+import studentRoutes from '../../backend/routes/student.js';
 
 async function parseBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;
@@ -34,7 +34,7 @@ function resolvePathname(req, prefix) {
 export default async function handler(req, res) {
   if (res.setHeader) {
     res.setHeader('Access-Control-Allow-Origin', '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   }
 
@@ -57,6 +57,6 @@ export default async function handler(req, res) {
     req.body = req.body || {};
   }
 
-  const pathname = resolvePathname(req, '/api/auth');
-  return authRoutes(req, res, pathname);
+  const pathname = resolvePathname(req, '/api/student');
+  return studentRoutes(req, res, pathname);
 }

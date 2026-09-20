@@ -1,4 +1,4 @@
-import userRoutes from '../backend/routes/users.js';
+import userRoutes from '../../backend/routes/users.js';
 
 async function parseBody(req) {
   if (req.body && typeof req.body === 'object') return req.body;

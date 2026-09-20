@@ -7,49 +7,10 @@ function createApiMiddleware(mode) {
     const rawUrl = req.url || '';
     const pathname = rawUrl.split('?')[0];
 
-    // Determine target module
-    let targetModule = null;
-    if (pathname.startsWith('/api/auth')) {
-      targetModule = 'backend/routes/auth.js';
-    } else if (pathname.startsWith('/api/student')) {
-      targetModule = 'backend/routes/student.js';
-    } else if (pathname.startsWith('/api/teacher')) {
-      targetModule = 'backend/routes/teacher.js';
-    } else if (pathname.startsWith('/api/users')) {
-      targetModule = 'backend/routes/users.js';
-    } else if (pathname === '/api/chat') {
-      targetModule = 'api/chat.js';
-    } else if (pathname === '/api/tts') {
-      targetModule = 'api/tts.js';
-    } else if (pathname === '/api/realtime/session') {
-      targetModule = 'api/realtime-session.js';
-    } else if (pathname === '/api/voices') {
-      targetModule = 'api/voices.js';
-    } else if (pathname === '/api/analyze') {
-      targetModule = 'api/analyze.js';
-    } else if (pathname === '/api/interview') {
-      targetModule = 'api/interview.js';
-    } else if (pathname === '/api/interview-analysis') {
-      targetModule = 'api/interview-analysis.js';
-    } else if (pathname === '/api/roleplay') {
-      targetModule = 'api/roleplay.js';
-    } else if (pathname === '/api/roleplay-analysis') {
-      targetModule = 'api/roleplay-analysis.js';
-    } else if (pathname === '/api/vocab-evaluate') {
-      targetModule = 'api/vocab-evaluate.js';
-    } else if (pathname === '/api/vocabulary') {
-      targetModule = 'api/vocabulary.js';
-    } else if (pathname === '/api/learning-plan') {
-      targetModule = 'api/learning-plan.js';
-    } else if (pathname === '/api/presentation-analysis') {
-      targetModule = 'api/presentation-analysis.js';
-    } else if (pathname === '/api/health') {
-      targetModule = 'api/health.js';
-    }
-
-    if (!targetModule) {
+    if (!pathname.startsWith('/api')) {
       return next ? next() : undefined;
     }
+    const targetModule = 'api/index.js';
 
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
