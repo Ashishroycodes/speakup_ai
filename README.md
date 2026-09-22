@@ -2,13 +2,18 @@
 AI-powered communication skills and interview preparation platform for students and early-career professionals.
 
 SpeakUp AI is a modern full-stack learning platform designed to help users practice communication, improve English speaking confidence, build vocabulary, and prepare for interviews through AI-powered conversations and interactive practice.
+
 The project combines a React-based frontend with a Node.js backend, configurable AI providers, voice-oriented APIs, authentication, and database support to create a practical personal communication coach.
+
 🌐 Live Demo
 🚀 Live Application:
 https://speakup-ai-psi.vercel.app/
+
 📦 GitHub Repository:
 https://github.com/Ashishroycodes/speakup_ai
+
 ✨ Why SpeakUp AI?
+
 Many students understand technical concepts but struggle to communicate them confidently in:
 - 🗣️ Everyday conversations
 - 🎤 English speaking practice
@@ -17,24 +22,32 @@ Many students understand technical concepts but struggle to communicate them con
 - 🤝 Group discussions and practice scenarios
 - 📚 Vocabulary building
 - 💬 Real-time AI conversations
+- 
 SpeakUp AI aims to make communication practice more accessible by giving users an interactive AI environment where they can practice repeatedly, receive guidance, and improve at their own pace.
+
 🚀 Key Features
+
 🗣️ AI Conversation Practice
 Practice natural conversations with an AI coach instead of relying only on traditional text-based exercises.
 Designed for:
+
 - Daily English speaking
 - Confidence building
 - Conversation practice
 - Situational communication
 - English/Hindi interaction workflows
+- 
 🎤 Voice Interaction
+
 SpeakUp AI includes a voice-oriented interaction layer with APIs for:
 - Text-to-Speech
 - Realtime communication sessions
 - AI conversation
 - Speech-based practice
 The backend exposes dedicated endpoints for chat, TTS, realtime sessions, and health monitoring.
+
 💼 Interview Preparation
+
 Practice interview communication in a dedicated environment.
 Potential practice areas include:
 - 👨‍💻 Technical interview communication
@@ -45,7 +58,9 @@ Potential practice areas include:
 - 🔄 Follow-up questions
 - 🗣️ Professional answer delivery
 The goal is not just to know the answer, but to communicate the answer clearly and confidently.
+
 📚 Vocabulary Builder
+
 A structured vocabulary experience can help learners practice different categories of words, including:
 - 🟢 Basic communication words
 - 🗣️ English speaking words
@@ -53,7 +68,9 @@ A structured vocabulary experience can help learners practice different categori
 - 🎤 Interview vocabulary
 - 📱 Modern social-media vocabulary
 - ⚡ Gen-Z vocabulary
+- 
 - 🔥 Advanced vocabulary
+- 
 Vocabulary can be organized by difficulty:
 Beginner → Intermediate → Advanced
 🎮 Interactive Practice & Challenges
@@ -64,7 +81,9 @@ Practice can include:
 - Communication tasks
 - Speaking activities
 - Progress-oriented practice
+- 
 🔐 Authentication & User Management
+
 The backend contains an authentication/database layer designed to support user accounts and roles.
 The project configuration includes:
 - User registration/login infrastructure
@@ -73,7 +92,9 @@ The project configuration includes:
 - Session-related data
 - Database persistence
 - Forgot-password/account workflows can be extended through the authentication layer
+- 
 🤖 Configurable AI Layer
+
 The application is designed around a configurable AI provider rather than hard-coding one provider.
 The current configuration supports providers/endpoints such as:
 - OpenAI-compatible APIs
@@ -113,21 +134,28 @@ Frontend
 - ⚡ Vite
 - 🎨 Modern responsive UI
 - 🧩 Lucide React icons
+- 
 Backend
 - 🟢 Node.js
 - 🌐 Native HTTP server
 - 🔌 REST-style API endpoints
 - 🔐 JWT authentication infrastructure
+- 
 Database
+
 - 🗄️ SQLite
 - 🐬 MySQL support
 - mysql2 database driver
+- 
 AI & Voice
+
 - 🤖 Configurable AI API layer
 - 🎙️ Text-to-Speech integration
 - ⚡ Realtime communication session support
 - 🔄 OpenAI-compatible endpoint support
+- 
 Deployment / Infrastructure
+
 - ▲ Vercel deployment configuration
 - ☁️ Cloudflare-related configuration
 - 📦 npm
@@ -159,6 +187,7 @@ speakup_ai/
 ├── wrangler.json           # Cloudflare configuration
 └── vite.config.mjs         # Vite configuration
 ⚙️ Getting Started
+
 1. Clone the repository
 git clone https://github.com/Ashishroycodes/speakup_ai.git
 cd speakup_ai
@@ -203,6 +232,7 @@ GET /api/health	Server health check
 API behavior may evolve as the project continues to develop.
 
 🔐 Environment Variables
+
 The project uses environment variables to keep secrets outside the source code.
 Important configuration values include:
 Variable	Purpose
@@ -253,7 +283,9 @@ AI Response
 User
 This architecture keeps the AI integration behind the backend so sensitive API credentials do not need to be exposed directly in the browser.
 🎯 Target Users
+
 SpeakUp AI is primarily designed for:
+
 - 🎓 College students
 - 💻 Computer Science / Engineering students
 - 👨‍💼 Job seekers
@@ -262,6 +294,7 @@ SpeakUp AI is primarily designed for:
 - 🎤 Interview candidates
 - 🗣️ People looking to improve communication confidence
 📈 Future Roadmap
+
 Planned improvements can include:
 - Advanced communication analytics
 - Detailed speaking feedback
@@ -280,7 +313,9 @@ Planned improvements can include:
 - More multilingual support
 - Advanced voice interaction
 - Deployment and performance optimization
+- 
 🔒 Security Notes
+
 For development and deployment:
 1. Never commit .env files containing real secrets.
 2. Use strong values for JWT_SECRET.
@@ -300,6 +335,7 @@ npm run lint
 npm run db:status
 npm run db:users
 npm run db:mysql-test
+
 🌟 Project Highlights
 What makes this project interesting?
 SpeakUp AI combines:
@@ -314,6 +350,7 @@ Example:
 ![AI Conversation](./screenshots/conversation.png)
 
 ![Interview Practice](./screenshots/interview.png)
+
 Recommended screenshots:
 1. Landing page
 2. Main dashboard
@@ -325,10 +362,13 @@ Recommended screenshots:
 🚀 Deployment
 The project includes deployment configuration for modern serverless/web hosting environments.
 For the current hosted version:
+
 Live Demo:
 https://speakup-ai-psi.vercel.app/
+
 Before deploying, configure the required environment variables in your hosting provider's dashboard.
 🤝 Contributing
+
 Contributions, suggestions, and improvements are welcome.
 Basic workflow
 git checkout -b feature/your-feature
@@ -339,6 +379,7 @@ Then open a Pull Request.
 📄 License
 This project does not currently declare a separate open-source license.
 If you intend to allow public reuse, modification, and distribution, consider adding an appropriate LICENSE file.
+
 👨‍💻 Author
 Ashish Roy
 B.Tech Computer Science & Engineering Student
@@ -349,6 +390,7 @@ Interested in:
 - 🌐 Web Applications
 - 📊 Data & Technology
 - 🚀 Building practical student-focused products
+  
 Connect
 - GitHub: https://github.com/Ashishroycodes
 - LinkedIn: https://www.linkedin.com/in/ashish-roy111/
